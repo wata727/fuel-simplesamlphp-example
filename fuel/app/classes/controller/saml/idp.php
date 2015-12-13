@@ -211,6 +211,7 @@ class Controller_Saml_Idp extends Controller
 
     public function get_sls()
     {
+        session_destroy();
     }
 
     public function action_login()
@@ -272,34 +273,36 @@ class Controller_Saml_Idp extends Controller
             }
         }
 
-        $globalConfig = SimpleSAML_Configuration::getInstance();
-        $t = new SimpleSAML_XHTML_Template($globalConfig, 'core:loginuserpass.php');
-        $t->data['stateparams'] = array('AuthState' => $authStateId);
-        if (array_key_exists('forcedUsername', $state)) {
-            $t->data['username'] = $state['forcedUsername'];
-            $t->data['forceUsername'] = TRUE;
-            $t->data['rememberUsernameEnabled'] = FALSE;
-            $t->data['rememberUsernameChecked'] = FALSE;
-            $t->data['rememberMeEnabled'] = $source->isRememberMeEnabled();
-            $t->data['rememberMeChecked'] = $source->isRememberMeChecked();
-        } else {
-            $t->data['username'] = $username;
-            $t->data['forceUsername'] = FALSE;
-            $t->data['rememberUsernameEnabled'] = $source->getRememberUsernameEnabled();
-            $t->data['rememberUsernameChecked'] = $source->getRememberUsernameChecked();
-            $t->data['rememberMeEnabled'] = $source->isRememberMeEnabled();
-            $t->data['rememberMeChecked'] = $source->isRememberMeChecked();
-            if (isset($_COOKIE[$source->getAuthId() . '-username'])) $t->data['rememberUsernameChecked'] = TRUE;
-        }
-        $t->data['links'] = $source->getLoginLinks();
-        $t->data['errorcode'] = $errorCode;
-        $t->data['errorparams'] = $errorParams;
-        if (isset($state['SPMetadata'])) {
-            $t->data['SPMetadata'] = $state['SPMetadata'];
-        } else {
-            $t->data['SPMetadata'] = NULL;
-        }
-        $t->show();
-        exit();
+        // $globalConfig = SimpleSAML_Configuration::getInstance();
+        // $t = new SimpleSAML_XHTML_Template($globalConfig, 'core:loginuserpass.php');
+        // $t->data['stateparams'] = array('AuthState' => $authStateId);
+        // if (array_key_exists('forcedUsername', $state)) {
+        //     $t->data['username'] = $state['forcedUsername'];
+        //     $t->data['forceUsername'] = TRUE;
+        //     $t->data['rememberUsernameEnabled'] = FALSE;
+        //     $t->data['rememberUsernameChecked'] = FALSE;
+        //     $t->data['rememberMeEnabled'] = $source->isRememberMeEnabled();
+        //     $t->data['rememberMeChecked'] = $source->isRememberMeChecked();
+        // } else {
+        //     $t->data['username'] = $username;
+        //     $t->data['forceUsername'] = FALSE;
+        //     $t->data['rememberUsernameEnabled'] = $source->getRememberUsernameEnabled();
+        //     $t->data['rememberUsernameChecked'] = $source->getRememberUsernameChecked();
+        //     $t->data['rememberMeEnabled'] = $source->isRememberMeEnabled();
+        //     $t->data['rememberMeChecked'] = $source->isRememberMeChecked();
+        //     if (isset($_COOKIE[$source->getAuthId() . '-username'])) $t->data['rememberUsernameChecked'] = TRUE;
+        // }
+        // $t->data['links'] = $source->getLoginLinks();
+        // $t->data['errorcode'] = $errorCode;
+        // $t->data['errorparams'] = $errorParams;
+        // if (isset($state['SPMetadata'])) {
+        //     $t->data['SPMetadata'] = $state['SPMetadata'];
+        // } else {
+        //     $t->data['SPMetadata'] = NULL;
+        // }
+        // $t->show();
+        // exit();
+
+        return View::forge('saml/login', array('authstate' => $authStateId));
     }
 }

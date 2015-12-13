@@ -10,6 +10,8 @@ require COREPATH.'bootstrap.php';
 // Register the autoloader
 \Autoloader::register();
 
+require APPPATH.'config/simplesaml/module.php';
+
 /**
  * Your environment.  Can be set to any of the following:
  *

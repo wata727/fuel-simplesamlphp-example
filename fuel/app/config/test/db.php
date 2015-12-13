@@ -8,9 +8,9 @@
 return array(
 	'default' => array(
 		'connection'  => array(
-			'dsn'        => 'mysql:host=localhost;dbname=fuel_test',
-			'username'   => 'fuel_app',
-			'password'   => 'super_secret_password',
+      'dsn'        => 'mysql:host=localhost;dbname=test;unix_socket=/tmp/mysql.sock',
+			'username'   => 'root',
+      'password'   => 'root',
 		),
 	),
 );

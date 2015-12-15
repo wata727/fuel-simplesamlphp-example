@@ -64,15 +64,13 @@ $config = array(
     ),
 
 
-    /*
     'example-sql' => array(
-        'sqlauth:SQL',
-        'dsn' => 'pgsql:host=sql.example.org;port=5432;dbname=simplesaml',
-        'username' => 'simplesaml',
-        'password' => 'secretpassword',
+        'sqlauth:Fuel',
+        'dsn' => 'mysql:host=localhost;port=3306;dbname=platform;unix_socket=/tmp/mysql.sock',
+        'username' => 'root',
+        'password' => 'root',
         'query' => 'SELECT uid, givenName, email, eduPersonPrincipalName FROM users WHERE uid = :username AND password = SHA2(CONCAT((SELECT salt FROM users WHERE uid = :username), :password),256);',
     ),
-    */
 
     /*
     'example-static' => array(
@@ -83,8 +81,9 @@ $config = array(
     ),
     */
 
+    /*
     'example-userpass' => array(
-        'exampleauth:CustomeUserPass',
+        'exampleauth:UserPass',
 
         // Give the user an option to save their username for future login attempts
         // And when enabled, what should the default be, to save the username or not
@@ -100,6 +99,7 @@ $config = array(
             'eduPersonAffiliation' => array('member', 'employee'),
         ),
     ),
+    */
 
     /*
     'crypto-hash' => array(

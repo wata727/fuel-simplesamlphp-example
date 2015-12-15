@@ -18,7 +18,7 @@ $metadata['http://localhost:3000/saml/idp/metadata/'] = array(
      * The authentication source which should be used to authenticate the
      * user. This must match one of the entries in config/authsources.php.
      */
-    'auth' => 'example-userpass',
+    'auth' => 'example-sql',
 
     'SingleSignOnService' => 'http://localhost:3000/saml/idp/sso/',
     'SingleLogoutService' => 'http://localhost:3000/saml/idp/sls/',
